@@ -5,10 +5,11 @@ def reward_function(params):
 
     ################## HELPER FUNCTIONS ###################
     # 计算两点之间的欧几里得距离
-    # 在 AWS DeepRacer 的上下文中，这个函数可以用来计算赛车与赛道上特定点之间的距离，这对于设计奖励函数非常有用。
+    # 用来计算赛车与赛道上特定点之间的距离，这对于设计奖励函数非常有用。
     def dist_2_points(x1, x2, y1, y2):
         return abs(abs(x1-x2)**2 + abs(y1-y2)**2)**0.5
 
+    # 在找到赛车当前位置最近的两个赛道点
     def closest_2_racing_points_index(racing_coords, car_coords):
 
         # Calculate all distances to racing points
@@ -29,6 +30,7 @@ def reward_function(params):
 
         return [closest_index, second_closest_index]
 
+    # 计算赛车与最近的赛道线之间的距离
     def dist_to_racing_line(closest_coords, second_closest_coords, car_coords):
         
         # Calculate the distances between 2 closest racing points
@@ -58,6 +60,7 @@ def reward_function(params):
         return distance
 
     # Calculate which one of the closest racing points is the next one and which one the previous one
+    # 通过模拟赛车沿着当前航向前进的情况，来计算赛车与最近两个赛道点的新距离，并根据这些距离来判断哪个是下一个赛道点
     def next_prev_racing_point(closest_coords, second_closest_coords, car_coords, heading):
 
         # Virtually set the car more into the heading direction
