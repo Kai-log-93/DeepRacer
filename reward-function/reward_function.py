@@ -88,6 +88,7 @@ def reward_function(params):
 
         return [next_point_coords, prev_point_coords]
 
+    # 计算赛车当前航向与赛道中心线方向之间的角度差
     def racing_direction_diff(closest_coords, second_closest_coords, car_coords, heading):
 
         # Calculate the direction of the center line based on the closest waypoints
@@ -112,6 +113,7 @@ def reward_function(params):
 
     # Gives back indexes that lie between start and end index of a cyclical list 
     # (start index is included, end index is not)
+    #  函数生成一个循环索引列表
     def indexes_cyclical(start, end, array_len):
 
         if end < start:
@@ -120,6 +122,8 @@ def reward_function(params):
         return [index % array_len for index in range(start, end)]
 
     # Calculate how long car would take for entire lap, if it continued like it did until now
+    # 预测赛车完成一圈的时间，基于它到目前为止的表现。
+    # 这个函数考虑了赛车已经通过的赛道点，以及与最优路径相比的当前实际时间和预期时间。
     def projected_time(first_index, closest_index, step_count, times_list):
 
         # Calculate how much time has passed since start
