@@ -4,7 +4,8 @@ import math
 def reward_function(params):
 
     ################## HELPER FUNCTIONS ###################
-
+    # 计算两点之间的欧几里得距离
+    # 在 AWS DeepRacer 的上下文中，这个函数可以用来计算赛车与赛道上特定点之间的距离，这对于设计奖励函数非常有用。
     def dist_2_points(x1, x2, y1, y2):
         return abs(abs(x1-x2)**2 + abs(y1-y2)**2)**0.5
 
